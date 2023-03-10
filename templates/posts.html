@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %} OffMyChest - A place to Share and Connect {% endblock %}
+
+{% block content %}
+
+<form method="post">
+    {{ search_form.hidden_tag() }}
+    {{ search_form.text.label }}:
+    {{ search_form.text }}
+    {{ search_form.submit }}
+</form>
+<main>
+    <div>
+        <h2>Hot Categories</h2>
+        <div style="display: flex; align-items: center;">
+            <ul>
+                {% for category, post_count in hot_categories %}
+                <li
+                    style="list-style-type: none; display: inline; margin-right: 24px; padding:1rem; {{ 'border-bottom: solid 1px black;' if request.args.get('category_id') == category.id|string else ''}}"
+                    >
+                    <a href="{{ url_for('posts', category_id=category.id)}}" style="text-decoration: none;">
+                        {{ category.name|title }}
+                        <span style="text-align: center; margin-left: 2px; background-color: black; color: white; border-radius: 50%; padding: 2px;">
+                            {{ post_count }}
+                        </span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{{ url_for('categories') }}" style="text-decoration: none;">Explore other categories</a>
+        </div>
+    </div>
+    <section>
+        <h2>Posts</h2>
+        <div 
+            style="
+                display: grid; 
+                grid-template-columns: 1fr 1fr; 
+                grid-template-rows: auto; 
+                column-gap: 2rem; 
+                row-gap: 1rem; 
+                padding: 10px;"
+        >
+            {% for post in posts %}
+            <div class="post" style="border: solid 1px rgba(0, 0, 0, .12); border-width: 1px 0 1px 0; padding: 1rem;">
+                <span style="background-color: burlywood; padding: 2px;">{{ post.category.name }}</span>
+                <h3><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h3>
+                <p>{{ post.content }}</p>
+                <p>by {{ post.user.username }}</p>
+                <p>{{ post.created_at }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Add more featured posts here -->
+    </section>
+
+</main>
+<footer>
+    <p>&copy; 2023 Off My Chest</p>
+</footer>
+
+{% endblock %}

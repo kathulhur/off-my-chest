@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %} OffMyChest - Create Post {% endblock %}
+
+
+
+{% block content %}
+<h1>Create Post</h1>
+<hr>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    
+    {{ form.title.label }} <br />
+    {{ form.title }}
+    {% for error in form.title.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    
+    {{ form.content.label }} <br />
+    {{ form.content(rows=10, cols=50) }}
+    {% for error in form.content.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+
+    {{ form.category.label }} <br />
+    {{ form.category }}
+    {% for error in form.content.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    
+    {{ form.submit }}
+</form>
+{% endblock %}

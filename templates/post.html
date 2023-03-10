@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %} OffMyChest - {{ post.title }} {% endblock %}
+
+{% block content %}
+<main>
+    <article>
+        <header>
+            <h2>{{ post.title }}</h2>
+            <span>{{ post.category.name }}</span>
+            <p>Posted on {{ post.created_at }} by {{ post.user.username }}</p>
+        </header>
+        <p>{{ post.content }}</p>
+        {% if post.user_id == current_user.id %}
+        <a href="{{ url_for('edit_post', post_id=post.id) }}">Edit</a>
+        <a href="{{ url_for('delete_post', post_id=post.id) }}">Delete</a>
+        {% endif %}
+        <div>
+            {% if upvoted %}
+                <form method="POST" action="{{ url_for('upvote', post_id=post.id)}}" >
+                    <input type="submit" value="Upvote" style="background-color: green;">
+                </form>
+            {% else %}
+                <form method="POST" action="{{ url_for('upvote', post_id=post.id)}}">
+                    <input type="submit" value="Upvote">
+                </form>
+            {% endif %}
+            {{ upvote_count }}
+            
+
+
+            {% if downvoted %}
+                <form method="POST" action="{{ url_for('downvote', post_id=post.id)}}">
+                    <input type="submit" value="Downvote" style="background-color: red;">
+                </form>
+            {% else %}
+                <form method="POST" action="{{ url_for('downvote', post_id=post.id)}}">
+                    <input type="submit" value="Downvote">
+                </form>
+            {% endif %}
+            {{ downvote_count }}
+
+        </div>
+        <form method="post">
+            {{ comment_form.hidden_tag() }}
+            {{ comment_form.content.label }} <br />
+            {{ comment_form.content(rows=10, column=50) }}
+            <br/>
+
+            {{ comment_form.submit }}
+        </form>
+        <ul class="comments">
+            {% for comment in post.comments %}
+            <li>
+                <h4>{{ comment.user.username }}</h4>
+                <p>{{ comment.content }}</p>
+                <p class="meta">Posted on {{ comment.created_at }}</p>
+                {% if comment.user_id == current_user.id %}
+                <form action="{{ url_for('delete_comment', post_id=post.id, comment_id=comment.id)}}" method="post">
+                    <input type="Submit" value="Delete"></input>
+                </form>
+                {% endif %}
+            </li>
+            {% endfor %}  
+        </ul>
+    </article>
+</main>
+<footer>
+    <p>&copy; 2023 Off My Chest</p>
+</footer>
+
+{% endblock %}

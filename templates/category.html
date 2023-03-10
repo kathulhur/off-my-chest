@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %} OffMyChest - {{ category.name }} {% endblock %}
+
+{% block content %}
+
+<main>
+    <section>
+        <h2>Relationships</h2>
+        <!-- Add code here to display posts in the Relationships category -->
+        <ul class="posts">
+            {% for post in posts %}
+            <li>
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content }}</p>
+                <a href="{{ url_for('post', post_id=post.id)}}">Read more</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2023 Off My Chest</p>
+</footer>
+
+{% endblock %}

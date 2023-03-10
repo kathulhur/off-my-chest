@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %} OffMyChest - Categories {% endblock %}
+
+{% block content %}
+
+<main>
+    <section>
+        <h2>Popular Categories</h2>
+        <ul class="categories">
+            {% for category in popular_categories %}
+            <li><a href="{{ url_for('category', category_id=category.id) }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+        <form method="post">
+            {{ form.hidden_tag() }}
+            {{ form.name.label }}<br/>
+            {{ form.name }}
+            <br/>
+            {{ form.submit }}
+        </form>
+        <h3>All Categories</h3>
+        <ul class="categories">
+            {% for category in categories %}
+            <li><a href="{{ url_for('category', category_id=category.id) }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2023 Off My Chest</p>
+</footer>
+
+{% endblock %}
