@@ -1,6 +1,6 @@
 import random
 from faker import Faker
-from app import db, User, Category, Post, Comment, Vote
+from main import db, User, Category, Post, Comment, Vote
 
 fake = Faker()
 
