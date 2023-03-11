@@ -3,8 +3,8 @@ from . import main
 from ..models import User, Post, Vote, Comment, Category
 from .. import db
 from flask import abort, render_template, redirect, flash, request, url_for
-from flask_login import login_required, login_user, logout_user, current_user
-from .forms import LoginForm, SignUpForm, CreatePostForm
+from flask_login import login_required, current_user
+from .forms import CreatePostForm
 
 @main.route('/')
 def index():
@@ -24,54 +24,6 @@ def index():
 
     return render_template('index.html', popular_posts=popular_posts, recent_posts=recent_posts)
 
-
-@main.route('/login', methods=["GET", "POST"])
-def login():
-    form = LoginForm()
-
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).filter_by(password=form.password.data).first()
-
-        if user is not None:
-            login_user(user)
-            next = request.args.get('next')
-            if next is None or not next.startswith('/'):
-                next = url_for('main.index')
-            return redirect(next)
-
-        flash("Invalid username or password.")        
-        
-    return render_template('login.html', form=form, s="hello world")
-
-
-@main.route('/logout', methods=["GET", "POST"])
-@login_required
-def logout():
-    logout_user()
-    flash("You have been logged out.")
-    return redirect(url_for('main.login'))
-
-
-@main.route('/signup', methods=["GET", "POST"])
-def signup():
-    form = SignUpForm()
-
-    if form.validate_on_submit():
-        try:
-            new_user = User(
-                username=form.username.data,
-                email=form.email.data,
-                password=form.password.data,
-            )
-            db.session.add(new_user)
-            db.session.commit()
-            flash("Sign up successful. You can now login.")
-            return redirect(url_for('main.login'))
-        except:
-            abort(500)
-
-        
-    return render_template('signup.html', form=form)
 
 
 from app.main.forms import CreateCategoryForm

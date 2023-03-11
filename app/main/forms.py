@@ -7,18 +7,6 @@ from wtforms.widgets import TextArea
 from ..models import Category
 
 
-class SignUpForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Submit')
-
-
-class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Login')
-
 class CreatePostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = StringField('Content', validators=[DataRequired()], widget=TextArea())

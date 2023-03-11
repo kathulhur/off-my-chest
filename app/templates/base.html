@@ -19,10 +19,10 @@
                     {% if current_user.is_authenticated %}
                         <li><a style="text-decoration: none;" href="{{ url_for('main.create_post') }}">Create Post</a></li>
                         <a href="{{ url_for('main.user', user_id=current_user.id) }}">{{ current_user.username }}</a>
-                        <li><a style="text-decoration: none;" href="{{ url_for('main.logout') }}">Log Out</a></li>
+                        <li><a style="text-decoration: none;" href="{{ url_for('auth.logout') }}">Log Out</a></li>
                     {% else %}
-                        <li><a style="text-decoration: none;" href="{{ url_for('main.login') }}">Log In</a></li>
-                        <li><a style="text-decoration: none;" href="{{ url_for('main.signup') }}">Sign Up</a></li>
+                        <li><a style="text-decoration: none;" href="{{ url_for('auth.login') }}">Log In</a></li>
+                        <li><a style="text-decoration: none;" href="{{ url_for('auth.signup') }}">Sign Up</a></li>
                     {% endif %}
                 </ul>
             </nav>
