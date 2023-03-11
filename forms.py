@@ -46,7 +46,7 @@ class CreateCommentForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class CreateCategoryForm(FlaskForm):
-    name = StringField('New Category', widget=TextArea(), validators=[DataRequired()])
+    name = StringField('New Category', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 

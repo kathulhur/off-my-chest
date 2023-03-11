@@ -1,34 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="margin: 0; padding: 0; height: 100%;">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %}</title>
 </head>
-<body style="margin: 0;">
-    <nav style="display: flex; justify-content: space-between; padding: 1rem;">
-        <ul style="list-style: none; display: flex; column-gap: 2rem; padding-left: 0;">
-            <li><a style="text-decoration: none;" href="{{ url_for('index') }}">OffMyChest</a></li>
-            <li><a style="text-decoration: none;" href="{{ url_for('posts') }}">Posts</a></li>
-            <li><a style="text-decoration: none;" href="{{ url_for('categories') }}">Categories</a></li>
-        </ul>
-        <ul style="list-style: none; display: flex; column-gap: 2rem; padding-left: 0;">
-            {% if current_user.is_authenticated %}
-                <li><a style="text-decoration: none;" href="{{ url_for('create_post') }}">Create Post</a></li>
-                <a href="{{ url_for('user', user_id=current_user.id) }}">{{ current_user.username }}</a>
-                <li><a style="text-decoration: none;" href="{{ url_for('logout') }}">Log Out</a></li>
-            {% else %}
-                <li><a style="text-decoration: none;" href="{{ url_for('login') }}">Log In</a></li>
-                <li><a style="text-decoration: none;" href="{{ url_for('signup') }}">Sign Up</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-    <div style="padding: 2rem;">
-        {% block content %}
-        
-        
-        {% endblock %}
+<body style="margin: 0; padding: 0; height: 100%;">
+    <div style="height: 100%; display: flex; flex-direction: column;">
+        <div style="flex: 1; display: flex; flex-direction: column;">
+            <nav style="display: flex; justify-content: space-between; padding: 1rem;">
+                <ul style="list-style: none; display: flex; column-gap: 2rem; padding-left: 0;">
+                    <li><a style="text-decoration: none;" href="{{ url_for('index') }}">OffMyChest</a></li>
+                    <li><a style="text-decoration: none;" href="{{ url_for('posts') }}">Posts</a></li>
+                    <li><a style="text-decoration: none;" href="{{ url_for('categories') }}">Categories</a></li>
+                </ul>
+                <ul style="list-style: none; display: flex; column-gap: 2rem; padding-left: 0;">
+                    {% if current_user.is_authenticated %}
+                        <li><a style="text-decoration: none;" href="{{ url_for('create_post') }}">Create Post</a></li>
+                        <a href="{{ url_for('user', user_id=current_user.id) }}">{{ current_user.username }}</a>
+                        <li><a style="text-decoration: none;" href="{{ url_for('logout') }}">Log Out</a></li>
+                    {% else %}
+                        <li><a style="text-decoration: none;" href="{{ url_for('login') }}">Log In</a></li>
+                        <li><a style="text-decoration: none;" href="{{ url_for('signup') }}">Sign Up</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <div style="flex: 1; padding: 2rem; display: flex; flex-direction: column;">
+                {% block content %}
+                
+                
+                {% endblock %}
+            </div>
+        </div>
+        <footer>
+            <p style="text-align: center;">&copy; 2023 Off My Chest</p>
+        </footer>
     </div>
 </body>
 </html>

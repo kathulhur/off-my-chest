@@ -6,10 +6,16 @@
   <h1>{{ user.username }}'s Profile</h1>
   <p>Email: {{ user.email }}</p>
 
-  <h2>Posts:</h2>
-  <ul>
-    {% for post in posts %}
-      <li><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
+  <h2>Your Latest Posts</h2>
+  <div style="display: flex; flex-direction: column; row-gap: 2rem;">
+      {% for post in posts %}
+      <article class="post" style="border: solid 1px rgba(0, 0, 0, .12); border-width: 1px 0 1px 0; padding: 1rem;">
+          <span style="background-color: burlywood; padding: 2px;">{{ post.category.name }}</span>
+          <h3><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h3>
+          <p>{{ post.content }}</p>
+          <p>by {{ post.user.username }}</p>
+          <p>{{ post.created_at }}</p>
+      </article>
+      {% endfor %}
+  </div>
 {% endblock %}

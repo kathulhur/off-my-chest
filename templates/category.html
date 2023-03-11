@@ -7,20 +7,26 @@
 <main>
     <section>
         <h2>{{ category.name }}</h2>
-        <!-- Add code here to display posts in the Relationships category -->
-        <ul class="posts">
+        <div 
+            style="
+                display: grid; 
+                grid-template-columns: 1fr 1fr; 
+                grid-template-rows: auto; 
+                column-gap: 2rem; 
+                row-gap: 1rem; 
+                padding: 10px;"
+        >
             {% for post in posts %}
-            <li>
-                <h3>{{ post.title }}</h3>
+            <article class="post" style="border: solid 1px rgba(0, 0, 0, .12); border-width: 1px 0 1px 0; padding: 1rem;">
+                <span style="background-color: burlywood; padding: 2px;">{{ post.category.name }}</span>
+                <h3><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h3>
                 <p>{{ post.content }}</p>
-                <a href="{{ url_for('post', post_id=post.id)}}">Read more</a>
-            </li>
+                <p>by {{ post.user.username }}</p>
+                <p>{{ post.created_at }}</p>
+            </article>
             {% endfor %}
-        </ul>
+        </div>
     </section>
 </main>
-<footer>
-    <p>&copy; 2023 Off My Chest</p>
-</footer>
 
 {% endblock %}

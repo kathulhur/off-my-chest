@@ -5,33 +5,35 @@
 
 
 {% block content %}
-<h1>Create Post</h1>
+<h1 style="text-align: center;">Create Post</h1>
 <hr>
 
-<form method="POST">
-    {{ form.hidden_tag() }}
-    
-    {{ form.title.label }} <br />
-    {{ form.title }}
-    {% for error in form.title.errors %}
-        {{ error }}
-    {% endfor %}
-    <br />
-    
-    {{ form.content.label }} <br />
-    {{ form.content(rows=10, cols=50) }}
-    {% for error in form.content.errors %}
-        {{ error }}
-    {% endfor %}
-    <br />
+<div style="display: flex; justify-content: center;">
+    <form method="POST" style="display: flex; flex-direction: column;">
+        {{ form.hidden_tag() }}
+        
+        {{ form.category.label }} <br />
+        {{ form.category }}
+        {% for error in form.content.errors %}
+            {{ error }}
+        {% endfor %}
+        <br /><br />
 
-    {{ form.category.label }} <br />
-    {{ form.category }}
-    {% for error in form.content.errors %}
-        {{ error }}
-    {% endfor %}
-    <br />
+        {{ form.title.label }} <br />
+        {{ form.title }}
+        {% for error in form.title.errors %}
+            {{ error }}
+        {% endfor %}
+        <br /><br />
+        
+        {{ form.content.label }} <br />
+        {{ form.content(rows=10, cols=50) }}
+        {% for error in form.content.errors %}
+            {{ error }}
+        {% endfor %}
+        <br /><br />
     
-    {{ form.submit }}
-</form>
+        {{ form.submit(style="height: 32px;") }}
+    </form>
+</div>
 {% endblock %}
