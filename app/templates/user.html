@@ -11,7 +11,7 @@
       {% for post in posts %}
       <article class="post" style="border: solid 1px rgba(0, 0, 0, .12); border-width: 1px 0 1px 0; padding: 1rem;">
           <span style="background-color: burlywood; padding: 2px;">{{ post.category.name }}</span>
-          <h3><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h3>
+          <h3><a href="{{ url_for('main.post', post_id=post.id) }}">{{ post.title }}</a></h3>
           <p>{{ post.content }}</p>
           <p>by {{ post.user.username }}</p>
           <p>{{ post.created_at }}</p>

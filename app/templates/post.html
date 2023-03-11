@@ -18,7 +18,7 @@
             <span>Tags:</span>
             <ul style="list-style: none; padding-left: 0; display: inline;">
                 <li style="display: inline;">
-                    <a href="{{ url_for('category', category_id=post.category_id)}}">{{ post.category.name }}</a>
+                    <a href="{{ url_for('main.category', category_id=post.category_id)}}">{{ post.category.name }}</a>
                 </li>
             </ul>
         </header>
@@ -26,21 +26,21 @@
         <p style="padding: 1rem 0 1rem 0;">{{ post.content }}</p>
 
         {% if post.user_id == current_user.id %}
-            <a href="{{ url_for('edit_post', post_id=post.id) }}">Edit</a>
-            <a href="{{ url_for('delete_post', post_id=post.id) }}">Delete</a>
+            <a href="{{ url_for('main.edit_post', post_id=post.id) }}">Edit</a>
+            <a href="{{ url_for('main.delete_post', post_id=post.id) }}">Delete</a>
         {% endif %}
 
         <div style="display: flex; column-gap: 1rem; justify-content: flex-end;">
             <div style="display: flex;">
                 <span style="margin-right: 8px;">{{ upvote_count }}</span>
-                <form method="POST" action="{{ url_for('upvote', post_id=post.id)}}">
+                <form method="POST" action="{{ url_for('main.upvote', post_id=post.id)}}">
                     <input type="submit" value="Upvote" style="{{ 'background-color: green;' if upvoted else '' }}">
                 </form>
             </div>
             |
             <div style="display: flex;">
                 <span style="margin-right: 8px;">{{ downvote_count }}</span>
-                <form method="POST" action="{{ url_for('downvote', post_id=post.id)}}">
+                <form method="POST" action="{{ url_for('main.downvote', post_id=post.id)}}">
                     <input type="submit" value="Downvote" style="{{ 'background-color: red;' if downvoted else '' }}">
                 </form>
             </div>
@@ -70,7 +70,7 @@
                         <p class="meta">Posted on {{ comment.created_at }}</p>
                     </div>
                     {% if comment.user_id == current_user.id %}
-                    <form action="{{ url_for('delete_comment', post_id=post.id, comment_id=comment.id)}}" method="post">
+                    <form action="{{ url_for('main.delete_comment', post_id=post.id, comment_id=comment.id)}}" method="post">
                         <input type="Submit" value="Delete"></input>
                     </form>
                     {% endif %}
@@ -80,8 +80,4 @@
         </div>
     </section>
 </main>
-<footer>
-    <p>&copy; 2023 Off My Chest</p>
-</footer>
-
 {% endblock %}

@@ -19,16 +19,16 @@
                 <li
                     style="display: inline; margin-right: 24px; padding:1rem; {{ 'border-bottom: solid 1px black;' if request.args.get('category_id') == category.id|string else ''}}"
                     >
-                    <a href="{{ url_for('posts', category_id=category.id)}}" style="text-decoration: none;">
+                    <a href="{{ url_for('main.posts', category_id=category.id)}}" style="text-decoration: none;">
                         {{ category.name|title }}
-                        <span style="text-align: center; margin-left: 2px; background-color: black; color: white; border-radius: 50%; padding: 2px;">
+                        <span style="display: inline-block; background-color: black; color: white; padding: 0.2em; border-radius: 50%; width: 1.5em; height: 1.5em; text-align: center; line-height: 1.5em; font-size: 12px;">
                             {{ post_count }}
                         </span>
                     </a>
                 </li>
                 {% endfor %}
             </ul>
-            <a href="{{ url_for('categories') }}" style="text-decoration: none;">Explore other categories</a>
+            <a href="{{ url_for('main.categories') }}" style="text-decoration: none;">Explore other categories</a>
         </div>
     </div>
     <section>
@@ -45,7 +45,7 @@
             {% for post in posts %}
             <article class="post" style="border: solid 1px rgba(0, 0, 0, .12); border-width: 1px 0 1px 0; padding: 1rem;">
                 <span style="background-color: burlywood; padding: 2px;">{{ post.category.name }}</span>
-                <h3><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h3>
+                <h3><a href="{{ url_for('main.post', post_id=post.id) }}">{{ post.title }}</a></h3>
                 <p>{{ post.content }}</p>
                 <p>by {{ post.user.username }}</p>
                 <p>{{ post.created_at }}</p>
