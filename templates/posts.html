@@ -6,18 +6,18 @@
 
 <form method="post">
     {{ search_form.hidden_tag() }}
-    {{ search_form.text.label }}:
-    {{ search_form.text }}
-    {{ search_form.submit }}
+    {{ search_form.text.label(style="font-weight:bold;") }} <br />
+    {{ search_form.text(style="width: 100%; height: 24px;") }}
+    {{ search_form.submit(style="display: none;") }}
 </form>
 <main>
-    <div>
+    <div style="margin: 2rem 0 2rem 0;">
         <h2>Hot Categories</h2>
         <div style="display: flex; align-items: center;">
-            <ul>
+            <ul style="list-style-type: none; padding-left: 0;">
                 {% for category, post_count in hot_categories %}
                 <li
-                    style="list-style-type: none; display: inline; margin-right: 24px; padding:1rem; {{ 'border-bottom: solid 1px black;' if request.args.get('category_id') == category.id|string else ''}}"
+                    style="display: inline; margin-right: 24px; padding:1rem; {{ 'border-bottom: solid 1px black;' if request.args.get('category_id') == category.id|string else ''}}"
                     >
                     <a href="{{ url_for('posts', category_id=category.id)}}" style="text-decoration: none;">
                         {{ category.name|title }}
