@@ -3,27 +3,31 @@
 {% block title %} Sign Up - OffMyChest {% endblock %}
 
 {% block content %}
-    {% if message %}
-        {{ message }}
-    {% endif %}
+    
 
     {% if form %}
-    <form method="post">
-        {{ form.hidden_tag() }}
-        {{ form.username.label }}
-        {{ form.username }}
-        <br/>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+        {% if message %}
+            {{ message }}
+        {% endif %}
+        <h2>Login</h2>
+        <form method="post" style="display: flex; flex-direction: column; justify-content: center; min-width: 300px;">
+            {{ form.hidden_tag() }}
+            {{ form.username.label }}
+            {{ form.username }}
+            <br/>
 
-        {{ form.email.label }}
-        {{ form.email }}
-        <br/>
+            {{ form.email.label }}
+            {{ form.email }}
+            <br/>
 
-        {{ form.password.label }}
-        {{ form.password }}
-        <br/>
+            {{ form.password.label }}
+            {{ form.password }}
+            <br/>
 
-        {{ form.submit }}
-    </form>
+            {{ form.submit }}
+        </form>
+    </div>
     {% endif %}
 
 {% endblock %}
