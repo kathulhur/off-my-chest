@@ -6,7 +6,10 @@
 
 <main>
     <section>
-        <h2>Popular Posts</h2>
+        <div style="display: flex; align-items: center; column-gap: 24px;">
+            <h2>Popular Posts</h2>
+            <a href="{{ url_for('posts') }}" style="text-decoration: none;">Explore all posts</a>
+        </div>
         <div 
             style="
                 display: grid; 
@@ -29,7 +32,10 @@
         <!-- Add more featured posts here -->
     </section>
     <section>
-        <h2>Recent Posts</h2>
+        <div style="display: flex; align-items: center; column-gap: 24px;">
+            <h2>Recent Posts</h2>
+            <a href="{{ url_for('posts') }}" style="text-decoration: none;">Explore all posts</a>
+        </div>
         <div 
             style="
                 display: grid; 
